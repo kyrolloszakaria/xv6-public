@@ -188,6 +188,7 @@ void            clearpteu(pde_t *pgdir, char *uva);
 
 // ours
 int             access(const char *pathname, int mode);
+int             dup(int oldfd);
 
 
 // number of elements in fixed-size array

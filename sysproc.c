@@ -98,3 +98,9 @@ sys_access(void)
   int mode;
   return access(pathname, mode);
 }
+int
+sys_dup(void)
+{
+  int fd;
+  return dup(fd);
+}

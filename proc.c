@@ -9,6 +9,7 @@
 #include <io.h>
 #include "stat.h"
 #include "fcntl.h"
+#include <cstddef>
 
 struct {
   struct spinlock lock;
@@ -544,4 +545,19 @@ int access(const char *path, int mode) {
     return 0;
 }
 
+// dup system call
+int dup(int fd) {
+    struct file *f;
+
+    // Check if the file descriptor is valid
+    if (fd < 0 || fd >= NOFILE || (f = myproc()->ofile[fd]) == NULL)
+        return -1;
+
+    // Attempt to duplicate the file
+    if (filedup(f) == 0)
+        return -1; // Error duplicating the file
+
+    // Return the new file descriptor on success
+    return fd;
+}
 

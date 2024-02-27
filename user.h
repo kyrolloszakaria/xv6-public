@@ -24,6 +24,7 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int access(const char *, int);
+int dup(int);
 
 // ulib.c
 int stat(const char*, struct stat*);
