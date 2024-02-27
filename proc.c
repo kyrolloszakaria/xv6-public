@@ -6,6 +6,9 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
+#include <io.h>
+#include "stat.h"
+#include "fcntl.h"
 
 struct {
   struct spinlock lock;
@@ -532,3 +535,13 @@ procdump(void)
     cprintf("\n");
   }
 }
+
+// Access system call
+int access(const char *path, int mode) {
+    int fd;
+    if ((fd = open(path, mode)) < 0) 
+        return -1;
+    return 0;
+}
+
+

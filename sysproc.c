@@ -6,7 +6,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
-#include <unistd.h> // for getcwd
+#include <unistd.h> // for access, if it didn't work add to to the source file and wirte getcwd function prototype. 
 
 int
 sys_fork(void)
@@ -92,16 +92,9 @@ sys_uptime(void)
 }
 
 int
-sys_getcwd(void)
+sys_access(void)
 {
-  int addr;
-  int size;
-  char *path;
-
-  if(argint(1, &size) < 0)
-    return -1;
-  if(argint(0, &addr) < 0)
-    return -1;
-  path = (char *)addr;
-  return getcwd(path, size);
+  const char *pathname;
+  int mode;
+  return access(pathname, mode);
 }
