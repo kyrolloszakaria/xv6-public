@@ -89,3 +89,18 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+int
+sys_getcwd(void)
+{
+  int addr;
+  int size;
+  char *path;
+
+  if(argint(1, &size) < 0)
+    return -1;
+  if(argint(0, &addr) < 0)
+    return -1;
+  path = (char *)addr;
+  return getcwd(path, size);
+}
